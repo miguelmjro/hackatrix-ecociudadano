@@ -1,7 +1,6 @@
 package com.co.latin.ecociudadano.controller;
 
-import com.co.latin.ecociudadano.model.ClientRanking;
-import com.co.latin.ecociudadano.model.GarbageTransaction;
+import com.co.latin.ecociudadano.model.*;
 import com.co.latin.ecociudadano.repositories.ClientRankingRepository;
 import com.co.latin.ecociudadano.repositories.GarbageTransactionRepository;
 import com.co.latin.ecociudadano.repositories.RankingRepository;
@@ -13,7 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.websocket.server.PathParam;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin
 @RestController
@@ -26,22 +27,46 @@ public class GarbageTransactionController {
     RankingRepository rankingRepository;
 
     @PostMapping(value = "/postTransaction")
-    public List<GarbageTransaction> getUser(@RequestBody GarbageTransaction transaction) {
+    public List<GarbageTransaction> getUser(@RequestBody Map<String,Object> transaction) {
         List<GarbageTransaction> lstTransactions = new ArrayList<GarbageTransaction>();
         ClientRanking clientRanking;
-        List<ClientRanking> rankings = clientRankingRepository.findByRankingByClientId(transaction.getClientId().getId());
-        if(rankings == null || rankings.isEmpty()){
+        Double point = (Double)transaction.get("point");
+
+        Client client = new Client();
+        client.setId(new Long(transaction.get("clientId").toString()));
+        Container container = new Container();
+        container.setId(new Long(transaction.get("clientId").toString()));
+        List<ClientRanking> clientRankings = clientRankingRepository.findByRankingByClientId(new Long(transaction.get("clientId").toString()));
+        if(clientRankings == null || clientRankings.isEmpty()){
             clientRanking = new ClientRanking();
-            clientRanking.setClientId(transaction.getClientId());
-            clientRanking.setScore(transaction.getPoint());
+            clientRanking.setClientId(client);
+            clientRanking.setScore(point);
         }else {
-            clientRanking = rankings.get(0);
-            clientRanking.setScore(clientRanking.getScore() + transaction.getPoint());
+            clientRanking = clientRankings.get(0);
+            clientRanking.setScore(clientRanking.getScore() + point);
         }
 
+        List<Ranking> rankings = rankingRepository.findByRankingByScore(clientRanking.getScore());
 
+        clientRanking.setRankingId(rankings.get(0));
 
         clientRankingRepository.save(clientRanking);
+
+        List<String> types = Arrays.asList("plastico", "papel", "vidrio");
+
+        Double weight = point/types.size();
+
+        Double points = point/types.size();
+
+        for(String type : types){
+            GarbageTransaction newTransaction = new GarbageTransaction();
+            newTransaction.setClientId(client);
+            newTransaction.setContainerId(container);
+            newTransaction.setGarbageType(type);
+            newTransaction.setWeight(weight);
+            newTransaction.setPoint(points);
+            lstTransactions.add(newTransaction);
+        }
 
         garbageTransactionRepository.saveAll(lstTransactions);
 

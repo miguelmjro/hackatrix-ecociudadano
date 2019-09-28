@@ -15,7 +15,10 @@ public class GarbageTransaction {
 
     @ManyToOne
     @JoinColumn(name = "container_id")
-    private Client containerId;
+    private Container containerId;
+
+    @Column(name = "garbage_type")
+    private String garbageType;
 
     @Column(name = "weight")
     private Double weight;
@@ -35,15 +38,15 @@ public class GarbageTransaction {
         return clientId;
     }
 
-    public void setClient(Client clientId) {
+    public void setClientId(Client clientId) {
         this.clientId = clientId;
     }
 
-    public Client getContainerId() {
+    public Container getContainerId() {
         return containerId;
     }
 
-    public void setContainerId(Client containerId) {
+    public void setContainerId(Container containerId) {
         this.containerId = containerId;
     }
 
@@ -61,5 +64,13 @@ public class GarbageTransaction {
 
     public void setPoint(Double point) {
         this.point = point;
+    }
+
+    public String getGarbageType() {
+        return garbageType;
+    }
+
+    public void setGarbageType(String garbageType) {
+        this.garbageType = garbageType;
     }
 }

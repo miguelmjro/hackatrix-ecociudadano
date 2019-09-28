@@ -10,6 +10,6 @@ import java.util.List;
 
 public interface ClientRankingRepository extends CrudRepository<ClientRanking, Integer> {
 
-    @Query("from client_ranking WHERE client_id=:client_id")
-    List<ClientRanking> findByRankingByClientId(@Param("client_id") Long clientId);
+    @Query("from ClientRanking WHERE client_id=:id")
+    List<ClientRanking> findByRankingByClientId(@Param("id") Long clientId);
 }
