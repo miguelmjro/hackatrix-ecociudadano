@@ -30,7 +30,7 @@ public class GarbageTransactionController {
     public List<GarbageTransaction> getUser(@RequestBody Map<String,Object> transaction) {
         List<GarbageTransaction> lstTransactions = new ArrayList<GarbageTransaction>();
         ClientRanking clientRanking;
-        Double point = (Double)transaction.get("point");
+        Double point = new Double(transaction.get("point").toString());
 
         Client client = new Client();
         client.setId(new Long(transaction.get("clientId").toString()));
