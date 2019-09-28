@@ -15,7 +15,7 @@ public class UserController {
 
     @GetMapping(value = "/user")
     public String getUser(@PathParam("username") String username) {
-
+        
         return "OK";
     }
 }

@@ -22,4 +22,44 @@ public class GarbageTransaction {
 
     @Column(name = "point")
     private Double point;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Client getClientId() {
+        return clientId;
+    }
+
+    public void setClient(Client clientId) {
+        this.clientId = clientId;
+    }
+
+    public Client getContainerId() {
+        return containerId;
+    }
+
+    public void setContainerId(Client containerId) {
+        this.containerId = containerId;
+    }
+
+    public Double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Double weight) {
+        this.weight = weight;
+    }
+
+    public Double getPoint() {
+        return point;
+    }
+
+    public void setPoint(Double point) {
+        this.point = point;
+    }
 }
