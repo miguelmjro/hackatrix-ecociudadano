@@ -12,5 +12,7 @@ public class EcocidadanoWS {
 	public String ping() {
 		return "OK";
 	}
+	
+	
 
 }
