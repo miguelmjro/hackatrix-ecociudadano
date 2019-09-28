@@ -52,7 +52,7 @@ public class GarbageTransactionController {
 
         clientRankingRepository.save(clientRanking);
 
-        List<String> types = Arrays.asList("plastico", "papel", "vidrio");
+        List<String> types = Arrays.asList("plastico", "papel", "vidrio","tetrapack");
 
         Double weight = point/types.size();
 
