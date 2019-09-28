@@ -3,7 +3,7 @@ package com.co.latin.ecociudadano.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "User")
+@Table(name = "user_ogin")
 public class User {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
