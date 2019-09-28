@@ -18,8 +18,8 @@ public class UserController {
 
     @GetMapping(value = "/user")
     public ResponseEntity<?> getUser(@PathParam("id") Integer id) {
-    	
-    	java.util.Optional<User> user = repository.findById(id);
+    	Long idl =  new Long(id);
+    	java.util.Optional<User> user = repository.findById(idl);
     	
     	if (user == null)
     		return new ResponseEntity<>("No existe el usuario. ",

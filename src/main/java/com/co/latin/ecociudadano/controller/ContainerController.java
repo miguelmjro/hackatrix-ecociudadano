@@ -2,6 +2,7 @@ package com.co.latin.ecociudadano.controller;
 
 import javax.websocket.server.PathParam;
 
+import com.co.latin.ecociudadano.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +22,9 @@ public class ContainerController {
 
     @GetMapping(value = "/container")
     public ResponseEntity<?> getContainer(@PathParam("id") Integer id) {
+        Long idl =  new Long(id);
     	
-    	java.util.Optional<Container> container = repository.findById(id);
+    	java.util.Optional<Container> container = repository.findById(idl);
     	
     	if (container == null)
     		return new ResponseEntity<>("No existe el container. ",
