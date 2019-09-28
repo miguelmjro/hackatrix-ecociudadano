@@ -12,4 +12,5 @@ public interface ClientRankingRepository extends CrudRepository<ClientRanking, I
 
     @Query("from ClientRanking WHERE client_id=:id")
     List<ClientRanking> findByRankingByClientId(@Param("id") Long clientId);
+
 }
