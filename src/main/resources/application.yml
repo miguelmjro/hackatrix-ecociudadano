@@ -12,8 +12,8 @@ spring:
       initial-size: 3
       max-wait: 20000
       max-active: 5
-      max-idle: 3
-      min-idle: 1
+      max-idle: 1
+      min-idle: 0
       default-auto-commit: true
   
   jpa:
