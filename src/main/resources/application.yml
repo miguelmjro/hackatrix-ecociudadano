@@ -9,11 +9,11 @@ spring:
     driverClassName: org.postgresql.Driver
     platform: postgres
     tomcat:
-      initial-size: 3
+      initial-size: 1
       max-wait: 20000
-      max-active: 5
+      max-active: 2
       max-idle: 1
-      min-idle: 0
+      min-idle: 1
       default-auto-commit: true
   
   jpa:

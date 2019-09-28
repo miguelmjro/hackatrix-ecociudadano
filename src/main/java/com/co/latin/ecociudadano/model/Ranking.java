@@ -12,6 +12,9 @@ public class Ranking {
     @Column(name = "min_score")
     private Double min_score;
 
+    @Column(name = "max_score")
+    private Double max_score;
+
     @Column(name = "name")
     private String name;
 
